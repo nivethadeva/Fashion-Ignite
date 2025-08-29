@@ -1,150 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-/* ✅ Alert fixed at top center */
+/* Alert message */
 .alert {
-  position: fixed;
-  top: 80px;   /* adjust if navbar exists */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ff4081;
+  display: inline-block;
+  background:  #ff4081;
   color: white;
-  padding: 12px 20px;
+  padding: 10px 20px;
   border-radius: 6px;
   font-weight: 500;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-/* Container for all products */
-.product-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  padding: 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* Product card */
-.product-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 15px;
+  margin: 15px auto;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
 }
 
-.product-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* Product image */
-.product-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: contain;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 12px;
-}
-
-/* Product name */
-.product-card h3 {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-/* Price */
-.product-card p {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #e91e63;
-  margin-bottom: 12px;
-}
-
-/* Add to Cart button */
-.product-card button {
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.product-card button:hover {
-  background-color: #b81d4b;
-}
-
-.heading-container {
-    text-align: center;
-    margin: 30px 0;
-}
-
-.page-heading {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 32px;
-    color: #e11d48;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    position: relative;
-    display: inline-block;
-}
-
-/* Simple underline effect */
-.page-heading::after {
-    content: "";
-    display: block;
-    width: 60%;
-    height: 3px;
-    background-color: #7b2cbf;
-    margin: 6px auto 0;
-    border-radius: 2px;
-}
-
-.page-subtext {
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    color: #444;
-    margin-top: 10px;
-    font-style: italic;
-}
-
-/* ✅ Responsive design */
-@media (max-width: 1024px) {
-  .product-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .product-container {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .product-card img {
-    height: 200px;
-  }
+/* Wrapper to center the alert */
+.alert-container {
+  text-align: center;
+  margin-bottom: 20px;
 }
 </style>
-
-<!-- ✅ Floating alert (doesn’t push heading down) -->
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert">{{ message }}</div>
-  {% endfor %}
-{% endif %}
 
 <div class="heading-container">
     <h1 class="page-heading"> Sarees & Kurtis Collection 👗</h1>
@@ -152,6 +26,15 @@
         Every outfit tells a story – bring out your elegance with our exclusive saree & kurti collection.
     </p>
 </div>
+
+<!-- ✅ Alert container (centered) -->
+{% if messages %}
+<div class="alert-container">
+  {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
 
 <div class="product-container">
   {% for product in products %}
