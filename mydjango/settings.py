@@ -16,7 +16,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-replace-me")
 DEBUG = True  # Always False in production
 
-# Allowed hosts: your Clever Cloud app URL
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
