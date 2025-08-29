@@ -2,7 +2,7 @@
 
 {% block content %}
 <style>
-/* Your existing CSS remains untouched */
+/* Your existing CSS is untouched */
 .product-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -149,7 +149,6 @@
        </a>
       <h3>{{ product.name }}</h3>
       <p>₹{{ product.price }}</p>
-      <!-- Removed form POST, replaced with static button -->
       <button class="add-to-cart-btn" data-id="{{ product.id }}">Add to Cart</button>
     </div>
     {% empty %}
@@ -180,7 +179,7 @@ document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
         .then(response => response.json())
         .then(data => {
             if(data.success) {
-                showAlert();  // Show static alert
+                showAlert();
             }
         });
     });
