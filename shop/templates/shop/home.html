@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-  
-  /* Container for all products */
+/* ✅ Alert fixed at top center */
+.alert {
+  position: fixed;
+  top: 80px;   /* adjust if navbar exists */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4081;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Container for all products */
 .product-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -54,7 +68,7 @@
   margin-bottom: 12px;
 }
 
-/* Add to Cart button */ 
+/* Add to Cart button */
 .product-card button {
   background-color: #e91e63;
   color: white;
@@ -70,17 +84,6 @@
   background-color: #b81d4b;
 }
 
-/* Alert message */
-.alert {
-  display: inline-block;
-  background:  #ff4081;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
 .heading-container {
     text-align: center;
     margin: 30px 0;
@@ -89,7 +92,7 @@
 .page-heading {
     font-family: "Playfair Display", Georgia, serif;
     font-size: 32px;
-    color:  #e11d48;
+    color: #e11d48;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 8px;
@@ -116,25 +119,32 @@
     font-style: italic;
 }
 
-/* ✅ Responsive design for mobile */
+/* ✅ Responsive design */
 @media (max-width: 1024px) {
   .product-container {
-    grid-template-columns: repeat(2, 1fr); /* Tablet 2 columns */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 }
 
 @media (max-width: 600px) {
   .product-container {
-    grid-template-columns: 1fr; /* Mobile 1 column */
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
   .product-card img {
-    height: 200px; /* slightly smaller images on mobile */
+    height: 200px;
   }
 }
 </style>
+
+<!-- ✅ Floating alert (doesn’t push heading down) -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
 
 <div class="heading-container">
     <h1 class="page-heading"> Sarees & Kurtis Collection 👗</h1>
@@ -161,6 +171,3 @@
   {% endfor %}
 </div>
 {% endblock %}
-
-
-
