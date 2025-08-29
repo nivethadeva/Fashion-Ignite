@@ -20,7 +20,8 @@ DEBUG = True  # Always False in production
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'app-add66c9a-2357-42d0-be55-7f4ea91e0d65.cleverapps.io'
+    'app-add66c9a-2357-42d0-be55-7f4ea91e0d65.cleverapps.io',
+    'nivetha.wuaze.com'
 ]
 
 # ------------------------------
