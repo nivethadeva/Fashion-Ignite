@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Women's Fashion</title>
+    <title >Women's Fashion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
@@ -10,21 +10,21 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: aliceblue;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 
-        .container {
-            flex: 1 0 auto;
         }
+.container {
+  flex: 1 0 auto;  /* grow but don’t force overscroll */
+}
 
-        .footer {
-            flex-shrink: 0;
-        }
+.footer {
+  flex-shrink: 0; /* footer stays fixed at bottom */
+}
 
-        /* Navbar */
         nav {
             display: flex;
             align-items: center;
@@ -40,76 +40,19 @@
             color: white;
             font-size: 22px;
             font-weight: bold;
-            text-decoration: none;
         }
+
         .logo:hover {
             color: #f472b6;
             transform: scale(1.05);
         }
 
-        /* Hamburger via Checkbox */
-        #menu-toggle {
-            display: none;
-        }
-        .menu-icon {
+        /* Hamburger (mobile only) */
+        .hamburger {
             font-size: 26px;
             color: white;
             cursor: pointer;
-            display: block;
-        }
-
-        /* Nav Links */
-        .nav-links {
-            display: none;
-            flex-direction: column;
-            align-items: flex-start;
-            background: #211f20;
-            width: 100%;
-            padding: 10px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 0;
-        }
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* ✅ Toggle using CSS */
-        #menu-toggle:checked ~ .nav-links {
-            display: flex;
-        }
-
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-        }
-        .dropdown > a {
-            color: white;
-            cursor: pointer;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: #333;
-            min-width: 160px;
-            z-index: 1;
-            flex-direction: column;
-            border-radius: 5px;
-        }
-        .dropdown-content a {
-            padding: 10px;
-            color: white;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background: #f472b6;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
+            margin-right: 15px;
         }
 
         /* Search bar */
@@ -118,12 +61,14 @@
             display: flex;
             justify-content: center;
         }
+
         .search-form {
             display: flex;
             align-items: center;
             width: 60%;
             max-width: 450px;
         }
+
         .search-form input {
             padding: 8px 12px;
             border: 1px solid #ccc;
@@ -132,6 +77,7 @@
             flex: 1;
             outline: none;
         }
+
         .search-form .search-btn {
             padding: 8px 15px;
             border: 1px solid #ccc;
@@ -143,30 +89,102 @@
 
         /* Username */
         .username {
-            font-weight: 900;
-            color: #f1eaee;
-            margin-left: 15px;
-            margin-right: 15px;
-            white-space: nowrap;
-            padding: 5px 12px;
-            border: 2px solid  #e91e63;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            background-color: #211f20;
-        }
-        .username:hover {
-            background-color: #10b981;
-            color: #fff;
-            border-color:#211f20;
+    font-weight: 900;
+    color: #f1eaee;
+    margin-left: 15px;
+    margin-right: 15px;
+    white-space: nowrap;
+    padding: 5px 12px;
+    border: 2px solid  #e91e63;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    cursor: default;
+    display: inline-block;
+    background-color: #211f20; /* keeps it neat */
+}
+
+/* Hover effect */
+.username:hover {
+    background-color: #10b981; /* green */
+    color: #fff;
+    border-color:#211f20;
+}
+
+
+        /* Nav Links */
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #211f20;
+            width: 100%;
+            padding: 10px;
+            position: absolute;
+            top: 60px;
+            left: 0;
         }
 
-        /* Desktop */
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            color: white;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #333;
+            min-width: 160px;
+            z-index: 1;
+            flex-direction: column;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background: #f472b6;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* ✅ Desktop layout */
         @media (min-width: 769px) {
-            .menu-icon {
+            nav {
+                justify-content: space-between;
+            }
+
+            .hamburger {
                 display: none;
             }
+
             .nav-links {
-                display: flex !important;
+                display: flex;
                 flex-direction: row;
                 align-items: center;
                 position: static;
@@ -176,11 +194,41 @@
             }
         }
 
+        /* Alerts */
+        .alert {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            width: fit-content;
+        }
+
+        .alert-success {
+            background-color: #369236;
+            color: white;
+        }
+
+        .alert-error {
+            background-color: #f44336;
+            color: white;
+        }
+
         /* Footer */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            flex: 1;
+        }
+
         .footer {
             background-color: #222;
             color: #e91e63;
             padding: 20px 15px;
+            font-family: Arial, sans-serif;
             font-size: 13px;
             text-align: center;
         }
@@ -189,9 +237,8 @@
 <body>
 
 <nav>
-    <!-- Hamburger Checkbox -->
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-icon">☰</label>
+    <!-- Hamburger Left -->
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
 
     <!-- Logo -->
     <a href="{% url 'shop:home' %}" class="logo">Women's Fashion</a>
@@ -204,13 +251,13 @@
         </form>
     </div>
 
-    <!-- Username -->
+    <!-- ✅ Username -->
     {% if user.is_authenticated %}
         <span class="username">Hi, {{ user.username }}</span>
     {% endif %}
 
-    <!-- Links -->
-    <div class="nav-links">
+    <!-- Navigation Links -->
+    <div class="nav-links" id="navLinks">
         <a href="{% url 'shop:home' %}">Home</a>
 
         <div class="dropdown">
@@ -232,7 +279,7 @@
     </div>
 </nav>
 
-<!-- Alerts -->
+<!-- Alert Messages -->
 {% if messages %}
     {% for message in messages %}
         <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
@@ -242,17 +289,27 @@
 {% endif %}
 
 <div class="container">
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 </div>
 
+<!-- Footer -->
 <footer class="footer">
     <div class="footer-bottom">
-        <div>&copy; 2025 Stylish Dresses. All rights reserved.</div>
+        <div class="footer-line1">
+            &copy; 2025 Stylish Dresses. All rights reserved.
+        </div>
         <hr>
-        <div>Email: abc@gmail.com | Phone: +91 7789765419 | Address: Coimbatore, India</div>
+        <div class="footer-line2">
+            Email: abc@gmail.com | Phone: +91 7789765419 | Address: Coimbatore, India
+        </div>
     </div>
 </footer>
 
+<script>
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 </body>
 </html>
-
