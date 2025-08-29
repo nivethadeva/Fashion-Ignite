@@ -24,6 +24,9 @@ ALLOWED_HOSTS = [
     'app.nivetha.my-style.in'
 ]
 
+SECURE_SSL_REDIRECT = True            # Redirect all HTTP to HTTPS
+SESSION_COOKIE_SECURE = True          # Only send session cookies over HTTPS
+CSRF_COOKIE_SECURE = True 
 # ------------------------------
 # Installed apps
 # ------------------------------
