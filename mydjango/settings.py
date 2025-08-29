@@ -22,7 +22,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'app-add66c9a-2357-42d0-be55-7f4ea91e0d65.cleverapps.io',
     'app.nivetha.my-style.in',
-    'nivetha.do-style.com'
+    'nivetha.do-style.com',
+    'nivetha.fin-tech.com'
 ]
 
 SECURE_SSL_REDIRECT = True            # Redirect all HTTP to HTTPS
