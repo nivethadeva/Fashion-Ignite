@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Women's Fashion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* ---------- General Styles ---------- */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            flex: 1 0 auto;
+            padding: 20px;
+        }
+
+        /* ---------- Navbar Styles ---------- */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #211f20;
+            padding: 12px 20px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #f472b6;
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger {
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            display: block;
+        }
+
+        /* ---------- Search Bar ---------- */
+        .search-bar {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .search-form {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-form input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+            flex: 1;
+            outline: none;
+        }
+
+        .search-form .search-btn {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+            background-color: antiquewhite;
+            cursor: pointer;
+        }
+
+        /* ---------- Navbar Links ---------- */
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background: #211f20;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active-link {
+            background-color: #f472b6;
+        }
+
+        /* ---------- Dropdown ---------- */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            display: block;
+            color: white;
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            background: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative; /* for mobile */
+        }
+
+        .dropdown.active .dropdown-content {
+            display: flex;
+        }
+
+        .dropdown-content a {
+            padding: 10px 20px;
+            color: white;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f472b6;
+        }
+
+        /* ---------- User Greeting ---------- */
+        .username {
+            font-weight: 900;
+            color: #f1eaee;
+            margin: 10px;
+            padding: 8px 15px;
+            border: 2px solid #e91e63;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: default;
+            display: inline-block;
+            background-color: #211f20;
+        }
+
+        .username:hover {
+            background-color: #10b981;
+            color: #fff;
+            border-color: #211f20;
+        }
+
+        /* ---------- Toast Messages ---------- */
+        .toast-container {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast-message {
+            background: #333;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateX(100%);
+            animation: slideIn 0.5s forwards, fadeOut 0.5s 3s forwards;
+        }
+
+        .toast-success { background: #4caf50; }
+        .toast-error { background: #e91e63; }
+
+        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeOut { to { opacity: 0; transform: translateX(100%); } }
+
+        /* ---------- Footer ---------- */
+        .footer {
+            background-color: #222;
+            color: #e91e63;
+            padding: 20px 15px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (min-width: 769px) {
+            .hamburger { display: none; }
+
+            nav {
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: flex !important;
+                flex-direction: row;
+                align-items: center;
+                width: auto;
+                background: none;
+                gap: 15px;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                flex-direction: column;
+                background: #333;
+                min-width: 150px;
+                z-index: 999;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: flex;
+            }
+
+            /* Prevent JS toggle from interfering on desktop */
+            .dropdown.active .dropdown-content {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <a href="{% url 'shop:home' %}" class="logo">Women's Fashion</a>
+
+    {% if user.is_authenticated %}
+        <span class="username">Hi, {{ user.username }}</span>
+    {% endif %}
+
+    <div class="search-bar">
+        <form method="get" action="{% url 'shop:product_search' %}" class="search-form">
+            <input type="text" name="q" placeholder="Search...">
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="{% url 'shop:home' %}" class="{% if request.path == '/' %}active-link{% endif %}">Home</a>
+
+        <div class="dropdown">
+            <a href="javascript:void(0)">Fashion ▾</a>
+            <div class="dropdown-content">
+                <a href="{% url 'shop:category_products' 'saree' %}">Sarees</a>
+                <a href="{% url 'shop:category_products' 'kurti' %}">Kurtis</a>
+            </div>
+        </div>
+
+        <a href="{% url 'shop:cart' %}">🛒 Cart ({{ request.session.cart|length|default:0 }})</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'shop:logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'shop:login' %}">Login</a>
+            <a href="{% url 'shop:register' %}">Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- Toast Messages -->
+<div class="toast-container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast-message {% if message.tags == 'success' %}toast-success{% else %}toast-error{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="footer">
+    &copy; 2025 Stylish Dresses. All rights reserved.<br>
+    Email: abc@gmail.com | Phone: +91 7789765419 | Address: Coimbatore, India
+</footer>
+
+<!-- ✅ JavaScript for mobile dropdown toggle -->
+<script>
+    function toggleMenu() {
+        document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const dropdownToggles = document.querySelectorAll('.dropdown > a');
+
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function (e) {
+                // Only toggle in mobile view
+                if (window.innerWidth < 769) {
+                    e.preventDefault();
+                    this.parentElement.classList.toggle('active');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
